@@ -11,6 +11,7 @@ import { getIdParam } from '#db-helpers/db-tool.js'
 import { Op } from 'sequelize'
 import sequelize from '#configs/db.js'
 const { User } = sequelize.models
+const { Contact_Book } = sequelize.models
 
 // 驗証加密密碼字串用
 import { compareHash } from '#db-helpers/password-hash.js'
@@ -239,7 +240,8 @@ router.put('/:id/profile', authenticate, async function (req, res) {
     return res.json({ status: 'error', message: '缺少必要資料' })
   }
 
-  // 查詢資料庫目前的資料
+  // ---------------查詢資料庫目前的資料
+  //  dbUser
   const dbUser = await User.findByPk(id, {
     raw: true, // 只需要資料表中資料
   })

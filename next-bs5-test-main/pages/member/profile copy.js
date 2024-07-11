@@ -12,7 +12,6 @@ import { avatarBaseUrl } from '@/configs'
 
 // 縣市區下拉式
 import TWZipCode from '@/components/tw-zipcode'
-
 // 會員資料navbar
 import MemberNavbar from '@/components/layout/default-layout/my-navbar/member-navbar'
 
@@ -48,24 +47,6 @@ export default function Profile() {
   const [userProfile, setUserProfile] = useState(initUserProfile)
   const [hasProfile, setHasProfile] = useState(false)
   const [selectedFile, setSelectedFile] = useState(null)
-
-  const handlePostcodeChange1 = (country, township, postcode) => {
-    setUserProfile({
-      ...userProfile,
-      county1: country,
-      district1: township,
-      zip1: postcode,
-    })
-  }
-
-  const handlePostcodeChange2 = (country, township, postcode) => {
-    setUserProfile({
-      ...userProfile,
-      county2: country,
-      district2: township,
-      zip2: postcode,
-    })
-  }
 
   // !! 注意phone, birth_date...等資料並沒有在auth.userData中，需自行向伺服器獲取
   // 這裡的設計重點，是auth.userData或JWT存取令牌中，並不記錄"會改變"的會員資料(密碼當然更不行，會有安全性問題)
@@ -245,7 +226,7 @@ export default function Profile() {
                     id="multiCollapseExample1"
                   >
                     <Form.Group className="row">
-                      <Form.Group className="col-6 mb-1">
+                      <Form.Group className="col-3 mb-1">
                         <Form.Label>姓名</Form.Label>
                         <Form.Control
                           type="text"
@@ -254,7 +235,7 @@ export default function Profile() {
                           onChange={handleFieldChange}
                         />
                       </Form.Group>
-                      <Form.Group className="col-6 mb-1">
+                      <Form.Group className="col-4 mb-1">
                         <Form.Label>手機號碼</Form.Label>
                         <Form.Control
                           type="text"
@@ -264,10 +245,33 @@ export default function Profile() {
                           onChange={handleFieldChange}
                         />
                       </Form.Group>
-                      <TWZipCode
-                        initPostcode={userProfile.zip1}
-                        onPostcodeChange={handlePostcodeChange1}
-                      />
+                      <Form.Group className="col-3 mb-1">
+                        <Form.Label>郵遞區號</Form.Label>
+                        <Form.Control
+                          type="text"
+                          name="zip1"
+                          value={userProfile.zip1}
+                          onChange={handleFieldChange}
+                        />
+                      </Form.Group>
+                      <Form.Group className="col-3 mb-2">
+                        <Form.Label>縣/市</Form.Label>
+                        <Form.Control
+                          type="text"
+                          name="county1"
+                          value={userProfile.county1}
+                          onChange={handleFieldChange}
+                        />
+                      </Form.Group>
+                      <Form.Group className="col-3 mb-2">
+                        <Form.Label>鄉/鎮/區</Form.Label>
+                        <Form.Control
+                          type="text"
+                          name="district1"
+                          value={userProfile.district1}
+                          onChange={handleFieldChange}
+                        />
+                      </Form.Group>
                       <Form.Group className="col mb-2">
                         <Form.Label>地址</Form.Label>
                         <Form.Control
@@ -281,7 +285,7 @@ export default function Profile() {
                   </Form.Group>
                 </Form.Group>
               </Form.Group>
-              <Form.Group className="mb-2">
+              {/* <Form.Group className="mb-2">
                 <a
                   className="btn btn-primary"
                   data-bs-toggle="collapse"
@@ -300,42 +304,39 @@ export default function Profile() {
                     id="multiCollapseExample2"
                   >
                     <Form.Group className="row">
-                      <Form.Group className="col-6 mb-1">
+                      <Form.Group className="col-3 mb-1">
                         <Form.Label>姓名</Form.Label>
                         <Form.Control
                           type="text"
-                          name="name2"
-                          value={userProfile.name2}
+                          name="name1"
+                          value={userProfile.name1}
                           onChange={handleFieldChange}
                         />
                       </Form.Group>
-                      <Form.Group className="col-6 mb-1">
+                      <Form.Group className="col-4 mb-1">
                         <Form.Label>手機號碼</Form.Label>
                         <Form.Control
                           type="text"
-                          name="phone2"
+                          name="phone1"
                           maxLength={10}
-                          value={userProfile.phone2}
+                          value={userProfile.phone1}
                           onChange={handleFieldChange}
                         />
                       </Form.Group>
-                      <TWZipCode
-                        initPostcode={userProfile.zip2}
-                        onPostcodeChange={handlePostcodeChange2}
-                      />
+
                       <Form.Group className="col mb-2">
                         <Form.Label>地址</Form.Label>
                         <Form.Control
                           type="text"
-                          name="address2"
-                          value={userProfile.address2}
+                          name="address1"
+                          value={userProfile.address1}
                           onChange={handleFieldChange}
                         />
                       </Form.Group>
                     </Form.Group>
                   </Form.Group>
                 </Form.Group>
-              </Form.Group>
+              </Form.Group> */}
               {/* 提交按鈕 */}
               <Button variant="primary" type="submit">
                 修改
