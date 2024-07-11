@@ -40,7 +40,7 @@ export default function MemberNavbar() {
           </li>
 
           <li className="nav-item">
-            <Link href="/member/orders" legacyBehavior>
+            <Link href="/member/new-cart" legacyBehavior>
               <a className="nav-link" aria-current="page">
                 我的訂單
               </a>

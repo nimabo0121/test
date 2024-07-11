@@ -9,7 +9,14 @@ import toast, { Toaster } from 'react-hot-toast'
 import Link from 'next/link'
 import PreviewUploadImage from '@/components/user-test/preview-upload-image'
 import { avatarBaseUrl } from '@/configs'
+
+// 縣市區下拉式
+import TWZipCode from '@/components/tw-zipcode'
+
+// 會員資料navbar
 import MemberNavbar from '@/components/layout/default-layout/my-navbar/member-navbar'
+
+// bootstrap 樣式
 import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -22,6 +29,19 @@ const initUserProfile = {
   birth_date: '',
   avatar: '',
   username: '',
+  name1: '', // 收件者name1
+  phone1: '', // 收件者手機1
+  zip1: '', // 區碼1
+  county1: '', // 縣/市1
+  district1: '', // 鄉鎮區1
+  address1: '', // 地址1
+  name2: '',
+  phone2: '',
+  zip2: '',
+  county2: '',
+  district2: '',
+  address2: '',
+  order_address1: '',
 }
 
 export default function Profile() {
@@ -29,6 +49,24 @@ export default function Profile() {
   const [userProfile, setUserProfile] = useState(initUserProfile)
   const [hasProfile, setHasProfile] = useState(false)
   const [selectedFile, setSelectedFile] = useState(null)
+
+  const handlePostcodeChange1 = (country, township, postcode) => {
+    setUserProfile({
+      ...userProfile,
+      county1: country,
+      district1: township,
+      zip1: postcode,
+    })
+  }
+
+  const handlePostcodeChange2 = (country, township, postcode) => {
+    setUserProfile({
+      ...userProfile,
+      county2: country,
+      district2: township,
+      zip2: postcode,
+    })
+  }
 
   // !! 注意phone, birth_date...等資料並沒有在auth.userData中，需自行向伺服器獲取
   // 這裡的設計重點，是auth.userData或JWT存取令牌中，並不記錄"會改變"的會員資料(密碼當然更不行，會有安全性問題)
@@ -90,7 +128,7 @@ export default function Profile() {
 
     // 送到伺服器進行更新
     // 更新會員資料用，排除avatar
-    let isUpdated = false
+    // let isUpdated = false
 
     const { avatar, ...user } = userProfile
     const res = await updateProfile(auth.userData.id, user)
@@ -119,17 +157,18 @@ export default function Profile() {
   }
 
   // 未登入時，不會出現頁面內容
-  if (!auth.isAuth) return <></>
+  if (!auth.isAuth) return
 
   return (
     <>
       <MemberNavbar />
-      <div className="container  d-flex justify-content-center">
+      <div className="container d-flex justify-content-center">
         <Card className="shadow" style={{ width: '31rem' }}>
           <Card.Body>
             <h2 className="text-center mb-4">會員資料</h2>
             <div className="text-center mb-3">
               {hasProfile ? (
+                // 如果有資料，顯示頭像預覽組件
                 <PreviewUploadImage
                   avatarImg={userProfile.avatar}
                   avatarBaseUrl={avatarBaseUrl}
@@ -137,6 +176,7 @@ export default function Profile() {
                   selectedFile={selectedFile}
                 />
               ) : (
+                // 否則顯示空白圖片和上傳頭像按鈕
                 <div>
                   <img src="/blank.webp" alt="" width="100" height="100" />
                   <div>
@@ -152,6 +192,7 @@ export default function Profile() {
             </div>
             <hr />
             <Form onSubmit={handleSubmit}>
+              {/* 表單控制項，用於修改姓名、帳號、電話等資料 */}
               <Form.Group className="mb-3" controlId="formName">
                 <Form.Label>姓名</Form.Label>
                 <Form.Control
@@ -172,7 +213,7 @@ export default function Profile() {
                 />
               </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formPhone">
+              <Form.Group className="mb-1" controlId="formPhone">
                 <Form.Label>電話</Form.Label>
                 <Form.Control
                   type="text"
@@ -182,6 +223,121 @@ export default function Profile() {
                   maxLength={10}
                 />
               </Form.Group>
+
+              {/* 顯示或隱藏額外的購物欄位資訊 */}
+              <Form.Group className="mb-2">
+                <a
+                  className="btn btn-primary"
+                  data-bs-toggle="collapse"
+                  href="#multiCollapseExample1"
+                  role="button"
+                  aria-expanded="false"
+                  aria-controls="multiCollapseExample1"
+                >
+                  收件者欄位 1
+                </a>
+              </Form.Group>
+
+              {/* 多個折疊面板內容，包含收件者姓名和電話號碼 */}
+              <Form.Group className="row">
+                <Form.Group className="col">
+                  <Form.Group
+                    className="collapse multi-collapse"
+                    id="multiCollapseExample1"
+                  >
+                    <Form.Group className="row">
+                      <Form.Group className="col-6 ">
+                        <Form.Label>姓名</Form.Label>
+                        <Form.Control
+                          type="text"
+                          name="name1"
+                          value={userProfile.name1}
+                          onChange={handleFieldChange}
+                        />
+                      </Form.Group>
+                      <Form.Group className="col-6">
+                        <Form.Label>手機號碼</Form.Label>
+                        <Form.Control
+                          type="text"
+                          name="phone1"
+                          maxLength={10}
+                          value={userProfile.phone1}
+                          onChange={handleFieldChange}
+                        />
+                      </Form.Group>
+                      <TWZipCode
+                        initPostcode={userProfile.zip1}
+                        onPostcodeChange={handlePostcodeChange1}
+                      />
+                      <Form.Group className="col">
+                        <Form.Label>地址</Form.Label>
+                        <Form.Control
+                          type="text"
+                          name="address1"
+                          value={userProfile.address1}
+                          onChange={handleFieldChange}
+                        />
+                      </Form.Group>
+                    </Form.Group>
+                  </Form.Group>
+                </Form.Group>
+              </Form.Group>
+              <Form.Group className="mb-2">
+                <a
+                  className="btn btn-primary"
+                  data-bs-toggle="collapse"
+                  href="#multiCollapseExample2"
+                  role="button"
+                  aria-expanded="false"
+                  aria-controls="multiCollapseExample2"
+                >
+                  收件者欄位 2
+                </a>
+              </Form.Group>
+              <Form.Group className="row">
+                <Form.Group className="col">
+                  <Form.Group
+                    className="collapse multi-collapse"
+                    id="multiCollapseExample2"
+                  >
+                    <Form.Group className="row">
+                      <Form.Group className="col-6 mb-1">
+                        <Form.Label>姓名</Form.Label>
+                        <Form.Control
+                          type="text"
+                          name="name2"
+                          value={userProfile.name2}
+                          onChange={handleFieldChange}
+                        />
+                      </Form.Group>
+                      <Form.Group className="col-6 mb-1">
+                        <Form.Label>手機號碼</Form.Label>
+                        <Form.Control
+                          type="text"
+                          name="phone2"
+                          maxLength={10}
+                          value={userProfile.phone2}
+                          onChange={handleFieldChange}
+                        />
+                      </Form.Group>
+                      <TWZipCode
+                        initPostcode={userProfile.zip2}
+                        onPostcodeChange={handlePostcodeChange2}
+                      />
+                      <Form.Group className="col mb-2">
+                        <Form.Label>地址</Form.Label>
+                        <Form.Control
+                          type="text"
+                          name="address2"
+                          value={userProfile.address2}
+                          onChange={handleFieldChange}
+                        />
+                      </Form.Group>
+                    </Form.Group>
+                  </Form.Group>
+                </Form.Group>
+              </Form.Group>
+              {/* 提交按鈕 */}
               <Button variant="primary" type="submit">
                 修改
               </Button>
@@ -189,7 +345,7 @@ export default function Profile() {
           </Card.Body>
         </Card>
       </div>
-      {/* 土司訊息視窗用 */}
+      {/* 用於顯示訊息的土司組件 */}
       <Toaster />
     </>
   )

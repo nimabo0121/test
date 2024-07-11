@@ -80,7 +80,7 @@ export default function RegisterForm() {
           <div className="row mb-3">
             <div className="col-sm-12">
               <input
-                type="text"
+                type="password"
                 name="password"
                 className={`form-control w-100  `}
                 value={user.password}
