@@ -41,6 +41,7 @@ const initUserProfile = {
   county2: '',
   district2: '',
   address2: '',
+  order_address1: '',
 }
 
 export default function Profile() {
@@ -191,42 +192,47 @@ export default function Profile() {
             </div>
             <hr />
             <Form onSubmit={handleSubmit}>
-              {/* 表單控制項，用於修改姓名、帳號、電話等資料 */}
-              <Form.Group className="mb-3" controlId="formName">
-                <Form.Label>姓名</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="name"
-                  value={userProfile.name}
-                  onChange={handleFieldChange}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBirthDate">
-                <Form.Label>帳號</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="username"
-                  value={userProfile.username}
-                  onChange={handleFieldChange}
-                  disabled
-                />
-              </Form.Group>
-
-              <Form.Group className="mb-1" controlId="formPhone">
-                <Form.Label>電話</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="phone"
-                  value={userProfile.phone}
-                  onChange={handleFieldChange}
-                  maxLength={10}
-                />
-              </Form.Group>
+              <div className="row">
+                {/* 表單控制項，用於修改姓名、帳號、電話等資料 */}
+                <Form.Group className="mb-3 col-6" controlId="formName">
+                  <Form.Label>姓名</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="name"
+                    value={userProfile.name}
+                    onChange={handleFieldChange}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3 col-6" controlId="formBirthDate">
+                  <Form.Label>帳號</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="username"
+                    value={userProfile.username}
+                    onChange={handleFieldChange}
+                    disabled
+                  />
+                </Form.Group>
+              </div>
+              <div className="row">
+                <div className="col-6">
+                  <Form.Group className="mb-1" controlId="formPhone">
+                    <Form.Label>電話</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="phone"
+                      value={userProfile.phone}
+                      onChange={handleFieldChange}
+                      maxLength={10}
+                    />
+                  </Form.Group>
+                </div>
+              </div>
 
               {/* 顯示或隱藏額外的購物欄位資訊 */}
               <Form.Group className="mb-2">
                 <a
-                  className="btn btn-primary"
+                  className="btn btn-primary "
                   data-bs-toggle="collapse"
                   href="#multiCollapseExample1"
                   role="button"
@@ -245,7 +251,7 @@ export default function Profile() {
                     id="multiCollapseExample1"
                   >
                     <Form.Group className="row">
-                      <Form.Group className="col-6 mb-1">
+                      <Form.Group className="col-6 ">
                         <Form.Label>姓名</Form.Label>
                         <Form.Control
                           type="text"
@@ -254,7 +260,7 @@ export default function Profile() {
                           onChange={handleFieldChange}
                         />
                       </Form.Group>
-                      <Form.Group className="col-6 mb-1">
+                      <Form.Group className="col-6">
                         <Form.Label>手機號碼</Form.Label>
                         <Form.Control
                           type="text"
@@ -268,7 +274,7 @@ export default function Profile() {
                         initPostcode={userProfile.zip1}
                         onPostcodeChange={handlePostcodeChange1}
                       />
-                      <Form.Group className="col mb-2">
+                      <Form.Group className="col">
                         <Form.Label>地址</Form.Label>
                         <Form.Control
                           type="text"
@@ -296,7 +302,7 @@ export default function Profile() {
               <Form.Group className="row">
                 <Form.Group className="col">
                   <Form.Group
-                    className="collapse multi-collapse"
+                    className="collapse multi-collapse "
                     id="multiCollapseExample2"
                   >
                     <Form.Group className="row">
@@ -337,15 +343,25 @@ export default function Profile() {
                 </Form.Group>
               </Form.Group>
               {/* 提交按鈕 */}
-              <Button variant="primary" type="submit">
-                修改
-              </Button>
+              <div className="button-content">
+                <Button variant="primary" type="submit">
+                  修改
+                </Button>
+              </div>
             </Form>
           </Card.Body>
         </Card>
       </div>
       {/* 用於顯示訊息的土司組件 */}
       <Toaster />
+      <style jsx>
+        {`
+          .button-content {
+            display: flex;
+            justify-content: center;
+          }
+        `}
+      </style>
     </>
   )
 }

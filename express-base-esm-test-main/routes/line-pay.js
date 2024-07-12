@@ -54,7 +54,7 @@ router.post('/create-order', authenticate, async (req, res) => {
     id: orderId,
     user_id: userId,
     amount: req.body.amount,
-    status: 'pending', // 'pending' | 'paid' | 'cancel' | 'fail' | 'error'
+    status: '已付款', // 'pending' | 'paid' | 'cancel' | 'fail' | 'error'
     order_info: JSON.stringify(order), // 要傳送給line pay的訂單資訊
   }
 

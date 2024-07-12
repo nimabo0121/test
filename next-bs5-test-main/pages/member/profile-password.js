@@ -51,10 +51,11 @@ export default function PasswordPassword() {
   return (
     <Container>
       <MemberNavbar />
-      <div className="container  d-flex justify-content-center">
+      <div className="container d-flex justify-content-center">
         <Card className="shadow" style={{ width: '31rem' }}>
           <Card.Body>
-            <h1 className="pt-2">會員資料修改(密碼)</h1>
+            <h2 className="text-center mb-4">修改密碼</h2>
+
             <hr />
             <Form onSubmit={handleSubmit}>
               <Form.Group className="mb-3" controlId="formOriginPassword">
