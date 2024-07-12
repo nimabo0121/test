@@ -48,7 +48,7 @@ export default function MemberNavbar() {
           </li>
 
           <li className="nav-item">
-            <Link href="/member/order-history" legacyBehavior>
+            <Link href="/member/log-cart" legacyBehavior>
               <a className="nav-link" aria-current="page">
                 歷史訂單
               </a>

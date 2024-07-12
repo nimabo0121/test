@@ -1,5 +1,6 @@
 import useFirebase from '@/hooks/use-firebase'
 import { initUserData, useAuth } from '@/hooks/use-auth'
+import { useEffect } from 'react'
 import {
   googleLogin,
   checkAuth,
@@ -10,14 +11,18 @@ import {
 import toast, { Toaster } from 'react-hot-toast'
 import GoogleLogo from '@/components/icons/google-logo'
 
-// 因瀏覽器安全限制，改用signInWithPopup，詳見以下討論
-// https://github.com/orgs/mfee-react/discussions/129
-export default function GoogleLoginPopup() {
-  const { loginGoogle, logoutFirebase } = useFirebase()
+export default function GoogleLoginRedirect() {
+  // loginGoogleRedirect無callback，要改用initApp在頁面初次渲染後監聽google登入狀態
+  const { logoutFirebase, loginGoogleRedirect, initApp } = useFirebase()
   const { auth, setAuth } = useAuth()
 
+  // 這裡要設定initApp，讓這個頁面能監聽firebase的google登入狀態
+  useEffect(() => {
+    initApp(callbackGoogleLoginRedirect)
+  }, [])
+
   // 處理google登入後，要向伺服器進行登入動作
-  const callbackGoogleLoginPopup = async (providerData) => {
+  const callbackGoogleLoginRedirect = async (providerData) => {
     console.log(providerData)
 
     // 如果目前react(next)已經登入中，不需要再作登入動作
@@ -26,7 +31,7 @@ export default function GoogleLoginPopup() {
     // 向伺服器進行登入動作
     const res = await googleLogin(providerData)
 
-    // console.log(res.data)
+    console.log(res.data)
 
     if (res.data.status === 'success') {
       // 從JWT存取令牌中解析出會員資料
@@ -99,9 +104,9 @@ export default function GoogleLoginPopup() {
 
   return (
     <>
-      <h1>Google Login跳出視窗(popup)測試頁</h1>
+      <h1>Google Login重定向測試頁</h1>
       <p>會員狀態:{auth.isAuth ? '已登入' : '未登入'}</p>
-      <button onClick={() => loginGoogle(callbackGoogleLoginPopup)}>
+      <button onClick={() => loginGoogleRedirect()}>
         <GoogleLogo /> Google登入
       </button>
       <br />

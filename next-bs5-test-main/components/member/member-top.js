@@ -46,16 +46,10 @@ export default function MemberTop() {
 
   return (
     <>
-      {hasProfile ? (
         <MemberImage
           avatarImg={userProfile.avatar}
           avatarBaseUrl={avatarBaseUrl}
         />
-      ) : (
-        <div>
-          <img src="/blank.webp" alt="" width="50" height="50" />
-        </div>
-      )}
     </>
   )
 }

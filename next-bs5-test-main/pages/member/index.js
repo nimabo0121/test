@@ -5,7 +5,7 @@ export default function MemberIndex() {
   const router = useRouter()
   // 確保在瀏覽器中
   if (typeof window !== 'undefined') {
-    router.push('/member/login')
+    router.push('/member/profile')
   }
 
   return <></>

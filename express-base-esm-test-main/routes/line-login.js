@@ -142,7 +142,6 @@ router.get(
 
       // 使用httpOnly cookie來讓瀏覽器端儲存access token
       res.cookie('accessToken', accessToken, { httpOnly: true })
-
       // 傳送access token回應(react可以儲存在state中使用)
       return res.json({
         status: 'success',
