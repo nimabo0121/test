@@ -6,6 +6,7 @@ import Menubar from './menubar'
 import SearchForm from './search-form'
 import Toolbar from './toolbar'
 import ToturialPanel from './tutorial-panel'
+import NavberMotion from './navber-motion'
 
 import { useRouter } from 'next/router'
 import { useState } from 'react'
@@ -24,6 +25,7 @@ export default function MyNavbar() {
     <>
       <header>
         <nav className="navbar navbar-expand-lg fixed-top navbar-light bg-light">
+          <NavberMotion />
           <div className="container-fluid">
             <Link className="navbar-brand" href="/">
               <Image src="/next.svg" alt="" width={100} height={24} priority />
@@ -37,6 +39,7 @@ export default function MyNavbar() {
             >
               <span className="navbar-toggler-icon"></span>
             </button>
+
             <div
               className="offcanvas offcanvas-end"
               tabIndex="-1"

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import styles from './menubar.module.scss'
 
+import NavberMotion from './navber-motion'
 // 說明:
 // 選單客製化以靜態方式、移至config檔案或寫死(hard code)來產生是常見
 // 選單項目定義在這裡，下面元件程式碼會自動產生對應的dom
@@ -45,8 +46,10 @@ const menuItems = [
 ]
 
 export default function MainMenu({ currentRoute = '/' }) {
+  
   return (
     <>
+      
       <ul className="navbar-nav flex-grow-1 ps-lg-5 ps-xs-0 mx-auto">
         {menuItems.map((v) => {
           // 用children判斷是否有下拉選單
@@ -70,10 +73,12 @@ export default function MainMenu({ currentRoute = '/' }) {
 
           // 以下為有dropmenu(下拉選單)的選單項目的jsx
           return (
+            
             <li
               className={`nav-item dropdown ${styles['dropdown']}`}
               key={v.id}
             >
+
               <Link
                 // 尋找是否有符合 currentRoute 的 children href
                 className={`nav-link dropdown-toggle ${
@@ -88,11 +93,13 @@ export default function MainMenu({ currentRoute = '/' }) {
               >
                 {v.label}
               </Link>
+              
               <ul
                 className={`dropdown-menu ${styles['slideIn']} ${styles['dropdown-menu']}`}
               >
                 {v.children.map((v2) => {
                   return (
+                    
                     <li key={v2.id}>
                       <Link
                         className={`dropdown-item ${

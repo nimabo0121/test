@@ -9,7 +9,7 @@ import toast, { Toaster } from 'react-hot-toast'
 import Link from 'next/link'
 import PreviewUploadImage from '@/components/user-test/preview-upload-image'
 import { avatarBaseUrl } from '@/configs'
-
+import MemberLevel from '@/components/member/member-level'
 // 縣市區下拉式
 import TWZipCode from '@/components/tw-zipcode'
 
@@ -26,6 +26,7 @@ const initUserProfile = {
   name: '',
   sex: '',
   phone: '',
+  email: '',
   birth_date: '',
   avatar: '',
   username: '',
@@ -166,6 +167,7 @@ export default function Profile() {
         <Card className="shadow" style={{ width: '31rem' }}>
           <Card.Body>
             <h2 className="text-center mb-4">會員資料</h2>
+            
             <div className="text-center mb-3">
               {hasProfile ? (
                 // 如果有資料，顯示頭像預覽組件
@@ -190,7 +192,7 @@ export default function Profile() {
                 </div>
               )}
             </div>
-            <hr />
+            <MemberLevel />
             <Form onSubmit={handleSubmit}>
               <div className="row">
                 {/* 表單控制項，用於修改姓名、帳號、電話等資料 */}
@@ -224,6 +226,17 @@ export default function Profile() {
                       value={userProfile.phone}
                       onChange={handleFieldChange}
                       maxLength={10}
+                    />
+                  </Form.Group>
+                </div>
+                <div className="col-6">
+                  <Form.Group className="mb-1" controlId="formEmail">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="email"
+                      value={userProfile.email}
+                      onChange={handleFieldChange}
                     />
                   </Form.Group>
                 </div>

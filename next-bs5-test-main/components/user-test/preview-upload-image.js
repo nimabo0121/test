@@ -24,7 +24,7 @@ export default function PreviewUploadImage({
     return () => URL.revokeObjectURL(objectUrl)
   }, [selectedFile])
 
-  const handleFileChang = (e) => {
+  const handleFileChange = (e) => {
     const file = e.target.files[0]
 
     if (file) {
@@ -50,7 +50,7 @@ export default function PreviewUploadImage({
     <div className="image-upload">
       <label htmlFor="file-input">
         <img
-          className="rounded-circle"
+          className="rounded-circle preview-image"
           src={showImg()}
           alt=""
           width="150"
@@ -61,13 +61,26 @@ export default function PreviewUploadImage({
         id="file-input"
         type="file"
         name="file"
-        onChange={handleFileChang}
+        onChange={handleFileChange}
       />
-      <div>
-        <p>點按頭像可以選擇新照片</p>
-      </div>
       <style jsx>
         {`
+          .image-upload {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+          }
+
+          .preview-image {
+            transition: transform 0.2s ease-in-out;
+            box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
+          }
+
+          .preview-image:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+          }
+
           .image-upload > input {
             display: none;
           }

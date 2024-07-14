@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import toast, { Toaster } from 'react-hot-toast'
 import { updatePassword } from '@/services/user'
@@ -15,10 +15,11 @@ const initUserPassword = {
   confirm: '', //確認新密碼用(前端檢查用，不送後端)
 }
 
-export default function PasswordPassword() {
+export default function ForgetPassword() {
   const { auth } = useAuth()
   const [userPassword, setUserPassword] = useState(initUserPassword)
 
+  const [showPassword, setShowPassword] = useState(false)
   const handleFieldChange = (e) => {
     setUserPassword({ ...userPassword, [e.target.name]: e.target.value })
   }
@@ -49,19 +50,17 @@ export default function PasswordPassword() {
   if (!auth.isAuth) return <></>
 
   return (
-    <Container>
+    <>
       <MemberNavbar />
-      <div className="container d-flex justify-content-center">
-        <Card className="shadow" style={{ width: '31rem' }}>
-          <Card.Body>
+      <Container>
+        <div className="d-flex justify-content-center">
+          <Card className="shadow p-4" style={{ width: '31rem' }}>
             <h2 className="text-center mb-4">修改密碼</h2>
-
-            <hr />
             <Form onSubmit={handleSubmit}>
               <Form.Group className="mb-3" controlId="formOriginPassword">
                 <Form.Label>目前密碼</Form.Label>
                 <Form.Control
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   name="origin"
                   value={userPassword.origin}
                   onChange={handleFieldChange}
@@ -70,7 +69,7 @@ export default function PasswordPassword() {
               <Form.Group className="mb-3" controlId="formNewPassword">
                 <Form.Label>新密碼</Form.Label>
                 <Form.Control
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   name="new"
                   value={userPassword.new}
                   onChange={handleFieldChange}
@@ -79,20 +78,33 @@ export default function PasswordPassword() {
               <Form.Group className="mb-3" controlId="formConfirmPassword">
                 <Form.Label>新密碼確認</Form.Label>
                 <Form.Control
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   name="confirm"
                   value={userPassword.confirm}
                   onChange={handleFieldChange}
                 />
               </Form.Group>
-              <Button variant="primary" type="submit">
+              <Form.Group className="mb-3" controlId="formShowPassword">
+                <Form.Check
+                  type="switch"
+                  id="showPasswordSwitch"
+                  label="顯示密碼"
+                  checked={showPassword}
+                  onChange={() => setShowPassword(!showPassword)}
+                />
+              </Form.Group>
+              <Button
+                variant="primary"
+                type="submit"
+                className="d-block mx-auto"
+              >
                 修改
               </Button>
             </Form>
-          </Card.Body>
-        </Card>
-      </div>
-      <Toaster />
-    </Container>
+          </Card>
+        </div>
+        <Toaster />
+      </Container>
+    </>
   )
 }
