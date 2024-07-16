@@ -20,20 +20,22 @@ export default function DefaultLayout({ title = 'Next-BS5', children }) {
       <MyNavbarBS5 />
 
       <main className="flex-shrink-0 mt-3">
+     
         <div
           className="mt-5"
           style={{
-            position: 'relative',
+            position: 'absolute',
             margin: '0px',
             border: '0px',
             width: '100%',
-            height: '100%',
+            height: '80vh',
+            background: '#ccc',
           }}
         >
           <NextBreadCrumb isHomeIcon isChevron bgClass="" />
           <NavberMotion />
-          <div className="content-wrapper container">{children}</div>
         </div>
+        <div className="content-wrapper container">{children}</div>
 
         {/* 全域的載入動畫指示器 */}
         {loader()}

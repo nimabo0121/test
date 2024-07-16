@@ -135,7 +135,6 @@ export default function Profile() {
                     </Button>
                     <Collapse in={openDetails[order.id]}>
                       <div id={`orderDetailsCollapse-${order.id}`}>
-                       
                         <ul className="order-info-list">
                           {JSON.parse(order.order_info).packages.map(
                             (packageInfo) => (

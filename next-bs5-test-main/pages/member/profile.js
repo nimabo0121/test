@@ -162,12 +162,16 @@ export default function Profile() {
 
   return (
     <>
-      <MemberNavbar />
-      <div className="container d-flex justify-content-center">
+     
+        <MemberNavbar />
+      <div
+        className="container d-flex justify-content-center"
+        style={{ margin: '0px', border: '0px' }}
+      >
         <Card className="shadow" style={{ width: '31rem' }}>
           <Card.Body>
             <h2 className="text-center mb-4">會員資料</h2>
-            
+
             <div className="text-center mb-3">
               {hasProfile ? (
                 // 如果有資料，顯示頭像預覽組件

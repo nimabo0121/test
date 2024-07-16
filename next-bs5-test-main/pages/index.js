@@ -4,6 +4,7 @@ import NavberMotion from "@/components/layout/default-layout/my-navbar/navber-mo
 export default function Home() {
   return (
     <>
+    {/* <NavberMotion /> */}
     </>
   )
 }

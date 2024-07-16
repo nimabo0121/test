@@ -25,7 +25,7 @@ export default function MyNavbar() {
     <>
       <header>
         <nav className="navbar navbar-expand-lg fixed-top navbar-light bg-light">
-          <NavberMotion />
+          
           <div className="container-fluid">
             <Link className="navbar-brand" href="/">
               <Image src="/next.svg" alt="" width={100} height={24} priority />
@@ -70,6 +70,7 @@ export default function MyNavbar() {
               </div>
             </div>
           </div>
+      
         </nav>
         <ToturialPanel show={show} handleClose={handleClose} />
       </header>
