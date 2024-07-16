@@ -44,7 +44,6 @@ export default function Toolbar({ handleShow }) {
           <p className="d-none d-md-inline d-lg-none"> 購物車</p>
         </Link>
       </li>
-
       {auth.isAuth ? (
         <>
           <li className="nav-item dropdown">
@@ -77,6 +76,7 @@ export default function Toolbar({ handleShow }) {
                 </div>
               </li>
               <li>
+              
                 <Link
                   className="dropdown-item text-center"
                   href="/member/profile"
@@ -87,6 +87,7 @@ export default function Toolbar({ handleShow }) {
               <li>
                 <hr className="dropdown-divider" />
               </li>
+
               <li>
                 <Link className="dropdown-item text-center" href="/about">
                   客服中心

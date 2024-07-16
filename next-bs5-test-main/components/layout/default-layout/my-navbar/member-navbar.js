@@ -20,8 +20,16 @@ export default function MemberNavbar() {
   }, [router.asPath]) // 依賴項 router.asPath，變化時重新執行
 
   return (
-    <Container fluid>
-      <div className="d-flex justify-content-center">
+    <>
+      <div
+        className="container d-flex justify-content-center"
+        style={{
+          position: 'relative',
+          margin: '0px',
+          border: '0px',
+          zIndex: '500',
+        }}
+      >
         <ul className="nav nav-tabs flex-nowrap">
           <li className="nav-item">
             <Link href="/member/profile" legacyBehavior>
@@ -40,7 +48,7 @@ export default function MemberNavbar() {
           </li>
 
           <li className="nav-item">
-            <Link href="/member/orders" legacyBehavior>
+            <Link href="/member/new-cart" legacyBehavior>
               <a className="nav-link" aria-current="page">
                 我的訂單
               </a>
@@ -48,7 +56,7 @@ export default function MemberNavbar() {
           </li>
 
           <li className="nav-item">
-            <Link href="/member/order-history" legacyBehavior>
+            <Link href="/member/log-cart" legacyBehavior>
               <a className="nav-link" aria-current="page">
                 歷史訂單
               </a>
@@ -90,6 +98,6 @@ export default function MemberNavbar() {
           }
         `}
       </style>
-    </Container>
+    </>
   )
 }

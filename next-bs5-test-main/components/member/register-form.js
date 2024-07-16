@@ -50,9 +50,9 @@ export default function RegisterForm() {
     console.log(res.data)
 
     if (res.data.status === 'success') {
-      toast.success('資訊 - 會員註冊成功')
+      toast.success('會員註冊成功')
     } else {
-      toast.error(`錯誤 - 會員註冊失敗`)
+      toast.error(`會員註冊失敗`)
     }
   }
 
@@ -60,11 +60,19 @@ export default function RegisterForm() {
     <>
       <main className={`w-100 m-auto text-center form-member`}>
         <h2 className="text-center mb-3">加入會員</h2>
-        <p className={`text-center mb-3 ${styles['text-note']}`}>
-          建立 Next
-          會員個人檔案，學習最新開發技術與得到啟發，立即加入這個大家族。
-        </p>
         <form onSubmit={handleSubmit}>
+        <div className="row mb-3">
+            <div className="col-sm-6">
+              <input
+                type="text"
+                name="name"
+                className={`form-control `}
+                placeholder="姓名"
+                value={user.name}
+                onChange={handleFieldChange}
+              />
+            </div>
+          </div>
           <div className="row mb-3">
             <div className="col-sm-12">
               <input
@@ -102,18 +110,7 @@ export default function RegisterForm() {
               />
             </div>
           </div>
-          <div className="row mb-3">
-            <div className="col-sm-6">
-              <input
-                type="text"
-                name="name"
-                className={`form-control `}
-                placeholder="姓名"
-                value={user.name}
-                onChange={handleFieldChange}
-              />
-            </div>
-          </div>
+          
 
           <div className="row mb-3">
             <div className="col-sm-12">
@@ -195,43 +192,21 @@ export default function RegisterForm() {
             </div>
           </div>
 
-          <div className="row mb-3">
-            <div className="col-sm-12 text-start">
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  id="gridCheck1"
-                />
-                <label
-                  className={`form-check-label  ${styles['notice']}`}
-                  htmlFor="gridCheck1"
-                >
-                  訂閱電子郵件就能收到產品、優惠以及會員福利的最新消息
-                </label>
-              </div>
-            </div>
-          </div>
-          <div className="row mb-2">
-            <p className={`${styles['notice']}`}>
-              如建立帳號，即代表同意本站
-              <Link href="/about">隱私權政策</Link>和
-              <Link href="/about">使用條款</Link>。
-            </p>
-          </div>
+          <div className="row mb-2"></div>
           <button type="submit" className="btn btn-primary w-100">
             加入
           </button>
           <br />
           <button
+            className="btn btn-primary w-100 mt-2"
             type="button"
             onClick={() => {
               // 測試帳號 herry/11111
               setUser({
-                name: '榮恩',
+                name: 'apple',
                 email: 'ron@test.com',
-                username: 'ron',
-                password: '99999',
+                username: 'asd123456',
+                password: '11111',
                 sex: '男',
                 birth_date: '1999-01-11',
                 phone: '0962033555',

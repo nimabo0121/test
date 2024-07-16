@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from '@/hooks/use-auth'
 import { getUserById } from '@/services/user'
+
+// member-navber
 import MemberNavbar from '@/components/layout/default-layout/my-navbar/member-navbar'
+
+// bootstrap 樣式
 import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
@@ -92,7 +96,7 @@ export default function Profile() {
     <>
       <MemberNavbar />
       <Container fluid className="member-profile-container">
-        <h2 className="text-center mb-4 mt-3">購物訂單</h2>
+        <h2 className="text-center mb-4 mt-1">購物訂單</h2>
         {/* 顯示當前訂單 */}
         {purchaseOrders
           .slice(
@@ -131,7 +135,6 @@ export default function Profile() {
                     </Button>
                     <Collapse in={openDetails[order.id]}>
                       <div id={`orderDetailsCollapse-${order.id}`}>
-                        <h6 className="order-info-title mt-3">訂單詳情：</h6>
                         <ul className="order-info-list">
                           {JSON.parse(order.order_info).packages.map(
                             (packageInfo) => (
