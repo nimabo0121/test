@@ -20,7 +20,7 @@ const __dirname = path.dirname(__filename)
 
 // 讓 console.log 呈現檔案與行號，並且使用顏色標記字串訊息
 import { extendLog } from '#utils/tool.js' // 假設這裡是自定義工具的導入
-import 'colors' // 假設這裡是顏色庫的導入
+import 'colors' // 顏色庫的導入
 extendLog()
 
 // 建立 Express 應用程式
